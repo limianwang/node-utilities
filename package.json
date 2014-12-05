@@ -1,0 +1,26 @@
+{
+  "name": "node-utils",
+  "version": "1.0.0",
+  "description": "Generic utilities",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha -R spec -u bdd $(find tests -name 'test_*.js')"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/limianwang/node-utitlies.git"
+  },
+  "author": "Limian Wang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/limianwang/node-utitlies/issues"
+  },
+  "homepage": "https://github.com/limianwang/node-utitlies",
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "mocha": "^2.0.1"
+  }
+}
