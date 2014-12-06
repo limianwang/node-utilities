@@ -18,9 +18,11 @@ describe('Test utilities', function() {
     it('should be able to clone an object', function() {
       var obj = {
         a: {
-          b: 'c'
+          b: {
+            key: 'field'
+          }
         },
-        b: [1,2,3],
+        b: [1,2, { key: 'field2' } ],
         c: 3
       };
 

@@ -1,5 +1,5 @@
 {
-  "name": "node-utils",
+  "name": "node-utilities",
   "version": "1.0.0",
   "description": "Generic utilities",
   "main": "index.js",
@@ -7,13 +7,14 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha -R spec -u bdd $(find tests -name 'test_*.js')"
+    "test": "./node_modules/mocha/bin/mocha -R spec -u bdd $(find tests -name 'test_*.js')",
+    "coverage": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha $(find tests -name 'test_*.js') && open ./coverage/lcov-report/index.html"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/limianwang/node-utitlies.git"
   },
-  "author": "Limian Wang",
+  "author": "Limian Wang <limian.wang@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/limianwang/node-utitlies/issues"
@@ -21,6 +22,7 @@
   "homepage": "https://github.com/limianwang/node-utitlies",
   "devDependencies": {
     "chai": "^1.10.0",
+    "istanbul": "^0.3.4",
     "mocha": "^2.0.1"
   }
 }
