@@ -2,6 +2,8 @@ node-utitlies
 =============
 a generic utilities library for node.js
 
+[![Build Status](https://travis-ci.org/limianwang/node-utitlies.svg?branch=master)](https://travis-ci.org/limianwang/node-utitlies)
+
 # Installation
 
 Install and use it via npm + git. 
