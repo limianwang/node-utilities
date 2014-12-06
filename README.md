@@ -1,7 +1,14 @@
 node-utitlies
 =============
+a generic utilities library for node.js
 
-Generic Utils lib
+# Installation
+
+Install and use it via npm + git. 
+
+`npm install git+ssh://git@github.com:limianwang/node-utitlies.git --save`
+
+# Usage
 
 ```javascript
 var util = require('./');
@@ -15,3 +22,7 @@ var obj = {
 
 var cloned = util.clone(obj);
 ```
+
+# Tests
+
+All tests are within `tests`. Run using `npm test`
