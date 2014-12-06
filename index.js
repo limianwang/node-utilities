@@ -26,7 +26,18 @@ function clone(obj) {
   }
 }
 
+function merge(a, b) {
+  var out = clone(a);
+
+  Object.keys(b).forEach(function(key) {
+    out[key] = typeof b[key] === 'object' ? merge({}, b[key]) : b[key];
+  });
+
+  return out;
+}
+
 module.exports = {
-  clone: clone
+  clone: clone,
+  merge: merge
 };
 

@@ -49,4 +49,51 @@ describe('Test utilities', function() {
       expect(result).to.equal(obj);
     });
   });
+
+  describe('Merge', function() {
+    var merge;
+    before(function() {
+      merge = util.merge;
+    });
+
+    it('should be able to merge two objects', function() {
+      var a = {
+        a: 'b'
+      };
+
+      var b = {
+        b: 'c'
+      };
+
+      var o = {
+        a: 'b',
+        b: 'c'
+      };
+
+      var r = merge(a, b);
+      expect(r).to.deep.equal(o);
+
+    });
+
+    it('should be able to handle arrays', function() {
+      var a = {
+        a: [1, 2, 3]
+      };
+
+      var b = {
+        b: 'string'
+      };
+
+      var o = {
+        a: [1, 2, 3],
+        b: 'string'
+      };
+
+      var r = merge(a, b);
+      expect(r).to.deep.equal(o);
+
+      var p = merge(b, a);
+      expect(r).to.deep.equal(o);
+    });
+  });
 });
