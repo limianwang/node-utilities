@@ -43,6 +43,21 @@ var b = {
 var out = util.merge(a, b);
 ```
 
+Memoize: memoize function responses
+
+```javascript
+var util = require('./');
+
+function echo(i) {
+  return i;
+}
+
+var cache = memoize(echo);
+
+cache(1);
+cache(1); // returns from cache
+```
+
 # Tests
 
 All tests are within `tests`. Run using `npm test`, or use `npm run-script coverage` for test coverage.
