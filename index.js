@@ -1,6 +1,8 @@
 
 'use strict';
 
+var slice = Array.prototype.slice;
+
 function clone(obj) {
   var copy;
 
@@ -36,8 +38,23 @@ function merge(a, b) {
   return out;
 }
 
+function memoize(fn) {
+  var ctx = fn;
+  ctx._values = ctx.values || {};
+  return function() {
+    var args = slice.call(arguments);
+    var argsKey = args.join('');
+    if(!ctx._values[args]) {
+      ctx._values[args] = fn.apply(ctx, args);
+    }
+
+    return ctx._values[args];
+  };
+}
+
 module.exports = {
   clone: clone,
-  merge: merge
+  merge: merge,
+  memoize: memoize
 };
 
