@@ -1,14 +1,14 @@
-node-utitlies
+node-utilities
 =============
 a generic utilities library for node.js
 
-[![Build Status](https://travis-ci.org/limianwang/node-utitlies.svg?branch=master)](https://travis-ci.org/limianwang/node-utitlies)
+[![Build Status](https://travis-ci.org/limianwang/node-utilities.svg?branch=master)](https://travis-ci.org/limianwang/node-utilities)
 
 # Installation
 
 Install and use it via npm + git.
 
-`npm install git+ssh://git@github.com:limianwang/node-utitlies.git --save`
+`npm install git+ssh://git@github.com:limianwang/node-utilities.git --save`
 
 # Usage
 

@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/limianwang/node-utitlies.git"
+    "url": "https://github.com/limianwang/node-utilities.git"
   },
   "author": "Limian Wang <limian.wang@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/limianwang/node-utitlies/issues"
+    "url": "https://github.com/limianwang/node-utilities/issues"
   },
-  "homepage": "https://github.com/limianwang/node-utitlies",
+  "homepage": "https://github.com/limianwang/node-utilities",
   "devDependencies": {
     "chai": "^1.10.0",
     "istanbul": "^0.3.4",
