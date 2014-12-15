@@ -43,7 +43,6 @@ function memoize(fn) {
   ctx._values = ctx.values || {};
   return function() {
     var args = slice.call(arguments);
-    var argsKey = args.join('');
     if(!ctx._values[args]) {
       ctx._values[args] = fn.apply(ctx, args);
     }
