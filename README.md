@@ -58,6 +58,16 @@ cache(1);
 cache(1); // returns from cache
 ```
 
+Cluster: cluster helper to start (Max CPU - 1) workers.
+
+```javascript
+var util = require('./');
+
+util.cluster(function() {
+  // start server here...
+});
+```
+
 # Tests
 
 All tests are within `tests`. Run using `npm test`, or use `npm run-script coverage` for test coverage.

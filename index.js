@@ -1,6 +1,8 @@
 
 'use strict';
 
+var os = require('os');
+var cluster = require('cluster');
 var slice = Array.prototype.slice;
 
 function clone(obj) {
@@ -51,9 +53,33 @@ function memoize(fn) {
   };
 }
 
+function setupCluster(done) {
+  function fork() {
+    var worker = cluster.fork();
+
+    return worker;
+  }
+
+  if(cluster.isMaster) {
+    var max = os.cpus().length - 1 || 1;
+
+    for(var i = 0; i < max; i++) {
+      fork();
+    }
+
+    cluster.on('exit', function(worker) {
+      if(!worker.suicide) {
+        fork();
+      }
+    });
+  } else {
+    process.nextTick(done);
+  }
+}
+
 module.exports = {
   clone: clone,
   merge: merge,
-  memoize: memoize
+  memoize: memoize,
+  cluster: setupCluster
 };
-

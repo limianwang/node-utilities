@@ -1,6 +1,9 @@
 
 'use strict';
 
+var cluster = require('cluster');
+var os = require('os');
+
 var chai = require('chai');
 var sinon = require('sinon');
 var expect = chai.expect;
@@ -168,6 +171,107 @@ describe('Test utilities', function() {
       assert.ok(b1 === 4);
       assert.ok(b2 === 4);
       assert.ok(stub2.calledOnce);
+    });
+  });
+
+  describe('Cluster', function() {
+    var setup;
+    before(function() {
+      setup = util.cluster;
+    });
+
+    afterEach(function() {
+      cluster.removeAllListeners('exit');
+    });
+
+    it('should maintain a minimum of 1 forked', function(done) {
+      var mockCpus = ['cpu1'];
+
+      var cpu = sinon.stub(os, 'cpus').returns(mockCpus);
+      var fork = sinon.stub(cluster, 'fork');
+
+      setup();
+
+      process.nextTick(function() {
+        assert.ok(cpu.calledOnce);
+        assert.ok(fork.calledOnce);
+
+        os.cpus.restore();
+        cluster.fork.restore();
+        done();
+      });
+    });
+
+    it('should maintain up to max - 1', function(done) {
+      var mockCpus = ['cpu1', 'cpu2', 'cpu3'];
+
+      var cpu = sinon.stub(os, 'cpus').returns(mockCpus);
+      var fork = sinon.stub(cluster, 'fork');
+
+      setup();
+
+      process.nextTick(function() {
+        assert.ok(cpu.calledOnce);
+
+        expect(fork.callCount).to.be.equal(mockCpus.length - 1);
+
+        os.cpus.restore();
+        cluster.fork.restore();
+
+        done();
+      });
+    });
+
+    it('should be able to re-fork when a worker dies unexpectedly', function(done) {
+      var fork = sinon.stub(cluster, 'fork');
+
+      var mock = {
+        suicide: false
+      };
+
+      setup();
+
+      process.nextTick(function() {
+        expect(fork.callCount).to.be.equal(os.cpus().length - 1);
+
+        cluster.emit('exit', mock);
+
+        expect(fork.callCount).to.be.equal(os.cpus().length);
+        cluster.fork.restore();
+        done();
+      });
+    });
+
+    it('should prevent forking when worker dies by suiciding', function(done) {
+      var fork = sinon.stub(cluster, 'fork');
+
+      var mock = {
+        suicide: true
+      };
+
+      setup();
+
+      process.nextTick(function() {
+        expect(fork.callCount).to.be.equal(os.cpus().length - 1);
+        cluster.emit('exit', mock);
+        expect(fork.callCount).to.be.equal(os.cpus().length - 1);
+
+        cluster.fork.restore();
+        done();
+      });
+    });
+
+    it('should simply execute callback when process is not master', function(done) {
+      cluster.isMaster = false;
+
+      var stub = sinon.stub();
+
+      setup(stub);
+
+      process.nextTick(function() {
+        assert.ok(stub.calledOnce);
+        done();
+      });
     });
   });
 });
