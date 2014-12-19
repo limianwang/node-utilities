@@ -84,9 +84,9 @@ function unique(prefix, done) {
     prefix = '';
   }
 
-  crypto.randomBytes(16, function(err, id) {
-    id = prefix ? prefix + ':' + id.toString('hex') : id.toString('hex');
-    done(err, id);
+  crypto.randomBytes(16, function(err, token) {
+    token = prefix ? prefix + ':' + token.toString('hex') : token.toString('hex');
+    done(err, token);
   });
 }
 
