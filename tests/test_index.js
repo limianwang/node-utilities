@@ -262,6 +262,8 @@ describe('Test utilities', function() {
     });
 
     it('should simply execute callback when process is not master', function(done) {
+      var orig = cluster.isMaster;
+
       cluster.isMaster = false;
 
       var stub = sinon.stub();
@@ -270,6 +272,34 @@ describe('Test utilities', function() {
 
       process.nextTick(function() {
         assert.ok(stub.calledOnce);
+
+        cluster.isMaster = orig;
+        done();
+      });
+    });
+  });
+
+  describe('crypto', function() {
+    var unique;
+
+    before(function() {
+      unique = util.unique;
+    });
+
+    it('should be able to get a token without prefix', function(done) {
+      var prefix = 'hello';
+      unique(prefix, function(err, token) {
+        expect(err).to.not.be.ok;
+        expect(token).to.be.a('string').to.match(/hello:/);
+
+        done();
+      });
+    });
+
+    it('should be able to ommit optional prefix', function(done) {
+      unique(function(err, token) {
+        expect(err).to.not.be.ok;
+        expect(token).to.be.a('string');
         done();
       });
     });

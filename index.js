@@ -1,6 +1,7 @@
 
 'use strict';
 
+var crypto = require('crypto');
 var os = require('os');
 var cluster = require('cluster');
 var slice = Array.prototype.slice;
@@ -77,9 +78,22 @@ function setupCluster(done) {
   }
 }
 
+function unique(prefix, done) {
+  if(typeof prefix === 'function') {
+    done = prefix;
+    prefix = '';
+  }
+
+  crypto.randomBytes(16, function(err, id) {
+    id = prefix ? prefix + ':' + id.toString('hex') : id.toString('hex');
+    done(err, id);
+  });
+}
+
 module.exports = {
   clone: clone,
   merge: merge,
   memoize: memoize,
-  cluster: setupCluster
+  cluster: setupCluster,
+  unique: unique
 };
