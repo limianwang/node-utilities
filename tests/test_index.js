@@ -36,6 +36,15 @@ describe('Test utilities', function() {
       expect(result).to.not.equal(obj);
     });
 
+    it('should be able to clone an array', function() {
+      var arr = [1, 2, 3];
+
+      var cloned = clone(arr);
+
+      expect(cloned).to.not.equal(arr);
+      expect(cloned).to.deep.equal(arr);
+    });
+
     it('should be able to clone an object with `null`', function() {
       var obj = {
         a: null,
@@ -80,7 +89,7 @@ describe('Test utilities', function() {
 
     });
 
-    it('should be able to handle arrays', function() {
+    it('should merge objects embedded with array', function() {
       var a = {
         a: [1, 2, 3]
       };
@@ -99,6 +108,27 @@ describe('Test utilities', function() {
 
       var p = merge(b, a);
       expect(r).to.deep.equal(o);
+    });
+
+    it('should handle merge object and array', function() {
+      var a = {
+        a: 'b'
+      };
+
+      var b = [1, 2, 3];
+
+      var out = merge(a, b);
+
+      expect(out).to.deep.equal([{a : 'b'}, 1, 2, 3]);
+    });
+
+    it('should be able to merge arrays', function() {
+      var a1 = [1, 2, 3];
+      var a2 = [1, 3, 4];
+
+      var o = merge(a1, a2);
+
+      expect(o).to.deep.equal([1, 2, 3, 1, 3, 4]);
     });
   });
 
@@ -143,7 +173,7 @@ describe('Test utilities', function() {
       assert.ok(stub.calledTwice);
     });
 
-    it('should be able to memoize and keep context for different functions', function() {
+    it('should memoize and keep context for different functions', function() {
       var stub1 = sinon.stub();
       var stub2 = sinon.stub();
 
@@ -261,7 +291,7 @@ describe('Test utilities', function() {
       });
     });
 
-    it('should simply execute callback when process is not master', function(done) {
+    it('should execute callback when process is not master', function(done) {
       var orig = cluster.isMaster;
 
       cluster.isMaster = false;
