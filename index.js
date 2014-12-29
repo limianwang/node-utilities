@@ -32,11 +32,26 @@ function clone(obj) {
 }
 
 function merge(a, b) {
-  var out = clone(a);
+  a = clone(a);
 
-  Object.keys(b).forEach(function(key) {
-    out[key] = typeof b[key] === 'object' ? merge({}, b[key]) : b[key];
-  });
+  var isArray = Array.isArray(b);
+  var out = isArray ? [] : {};
+
+  if(isArray) {
+    out = out.concat(a);
+    b.forEach(function(value) {
+      if(typeof value === 'object') {
+        out.push(merge([], value));
+      } else {
+        out.push(value);
+      }
+    });
+  } else {
+    out = a;
+    Object.keys(b).forEach(function(key) {
+      out[key] = typeof b[key] === 'object' ? merge({}, b[key]) : b[key];
+    });
+  }
 
   return out;
 }
