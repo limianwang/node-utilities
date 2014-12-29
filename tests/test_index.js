@@ -280,8 +280,7 @@ describe('Test utilities', function() {
 
     it('should be able to take config', function(done) {
       var defaults = {
-        enable: true,
-        instances: 3
+        enable: true
       };
 
       var fork = sinon.stub(cluster, 'fork');
@@ -289,7 +288,7 @@ describe('Test utilities', function() {
       setup(defaults);
 
       process.nextTick(function() {
-        expect(fork.callCount).to.be.equal(3);
+        expect(fork.callCount).to.be.equal(1);
 
         cluster.fork.restore();
         done();
