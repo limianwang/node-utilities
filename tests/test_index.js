@@ -277,6 +277,69 @@ describe('Test utilities', function() {
         done();
       });
     });
+
+    it('should be able to take config', function(done) {
+      var defaults = {
+        instances: 3
+      };
+
+      var fork = sinon.stub(cluster, 'fork');
+
+      setup(defaults);
+
+      process.nextTick(function() {
+        expect(fork.callCount).to.be.equal(3);
+
+        cluster.fork.restore();
+        done();
+      });
+    });
+
+    it('should be able to take config and callback', function(done) {
+      var defaults = {
+        instances: 4
+      };
+
+      var fork = sinon.stub(cluster, 'fork');
+
+      var stub = sinon.stub();
+
+      setup(defaults, stub);
+
+      process.nextTick(function() {
+        expect(fork.callCount).to.be.equal(4);
+        assert.ok(stub.notCalled);
+
+        cluster.fork.restore();
+
+        done();
+      });
+    });
+
+    it('should be able to call callback on worker', function(done) {
+      var defaults = {};
+
+      var orig = cluster.isMaster;
+
+      cluster.isMaster = false;
+
+      var fork = sinon.stub(cluster, 'fork');
+      var stub = sinon.stub();
+
+      setup(defaults, stub);
+
+      process.nextTick(function() {
+        assert.ok(fork.notCalled);
+
+        assert.ok(stub.calledOnce);
+
+        cluster.fork.restore();
+
+        cluster.isMaster = orig;
+
+        done();
+      });
+    });
   });
 
   describe('crypto', function() {

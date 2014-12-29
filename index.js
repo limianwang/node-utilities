@@ -54,7 +54,20 @@ function memoize(fn) {
   };
 }
 
-function setupCluster(done) {
+function setupCluster(config, done) {
+  var defaults = {
+    instances: os.cpus().length - 1 || 1
+  };
+
+  if(arguments.length) {
+    if(typeof config === 'function') {
+      done = config;
+      config = defaults;
+    }
+  } else {
+    config = defaults;
+  }
+
   function fork() {
     var worker = cluster.fork();
 
@@ -62,9 +75,7 @@ function setupCluster(done) {
   }
 
   if(cluster.isMaster) {
-    var max = os.cpus().length - 1 || 1;
-
-    for(var i = 0; i < max; i++) {
+    for(var i = 0; i < config.instances; i++) {
       fork();
     }
 
