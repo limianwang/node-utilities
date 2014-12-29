@@ -125,7 +125,7 @@ describe('Test utilities', function() {
       assert.ok(stub.calledOnce);
     });
 
-    it('should be able to memoize a function but get called when having different arguments', function() {
+    it('should memoize based on arguments', function() {
       var stub = sinon.stub();
 
       function echo(i) {
