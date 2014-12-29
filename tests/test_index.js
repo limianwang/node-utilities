@@ -280,6 +280,7 @@ describe('Test utilities', function() {
 
     it('should be able to take config', function(done) {
       var defaults = {
+        enable: true,
         instances: 3
       };
 
@@ -297,6 +298,7 @@ describe('Test utilities', function() {
 
     it('should be able to take config and callback', function(done) {
       var defaults = {
+        enable: true,
         instances: 4
       };
 
@@ -337,6 +339,27 @@ describe('Test utilities', function() {
 
         cluster.isMaster = orig;
 
+        done();
+      });
+    });
+
+    it('should be able to disable cluster', function(done) {
+      var defaults = {
+        instances: 2
+      };
+
+      expect(defaults).to.not.have.property('enable');
+
+      var fork = sinon.stub(cluster, 'fork');
+      var stub = sinon.stub();
+
+      setup(defaults, stub);
+
+      process.nextTick(function() {
+        assert.ok(fork.notCalled);
+        assert.ok(stub.calledOnce);
+
+        cluster.fork.restore();
         done();
       });
     });

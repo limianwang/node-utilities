@@ -56,6 +56,7 @@ function memoize(fn) {
 
 function setupCluster(config, done) {
   var defaults = {
+    enable: true,
     instances: os.cpus().length - 1 || 1
   };
 
@@ -74,8 +75,10 @@ function setupCluster(config, done) {
     return worker;
   }
 
-  if(cluster.isMaster) {
-    for(var i = 0; i < config.instances; i++) {
+  var instances = config.instances ? config.instances : 1;
+
+  if(config.enable && cluster.isMaster) {
+    for(var i = 0; i < instances; i++) {
       fork();
     }
 
