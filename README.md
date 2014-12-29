@@ -58,13 +58,52 @@ cache(1);
 cache(1); // returns from cache
 ```
 
-Cluster: cluster helper to start (Max CPU - 1) workers.
+Cluster: Helper to start process in a cluster.
+
+Takes optional `config` as follow:
+
+```json
+{
+  "enable": true,
+  "instances": 5
+}
+```
+
+By default, the `instances` is set to (Max CPUs - 1).
+
+```javascript
+var util = require('./');
+var http = require('http');
+
+function start() {
+  http.createServer(function(req, res) {}).listen(3000);
+}
+util.cluster(function() {
+  // start server...
+  start();
+});
+
+// Or using configs.
+
+util.cluster(config, function() {
+  // start server...
+  start();
+});
+```
+
+Token: Token creator
 
 ```javascript
 var util = require('./');
 
-util.cluster(function() {
-  // start server here...
+util.unique(function(err, token) {
+  console.log(token); // use unique token.
+});
+
+// or allow prefix.
+
+util.unique('someprefix', function(err, token) {
+  console.log(token); // someprefix:<unique>
 });
 ```
 
