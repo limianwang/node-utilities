@@ -41,7 +41,7 @@ function merge(a, b) {
     out = out.concat(a);
     b.forEach(function(value) {
       if(typeof value === 'object') {
-        out.push(merge([], value));
+        out.push(merge(Array.isArray(value) ? [] : {}, value));
       } else {
         out.push(value);
       }

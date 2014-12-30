@@ -110,6 +110,16 @@ describe('Test utilities', function() {
       expect(r).to.deep.equal(o);
     });
 
+    it('should merge object within array', function() {
+      var a = [[1, 2, 3], { a: 'b' }];
+      var b = [1, 2, 3];
+
+      var out = merge(a, b);
+
+      var expected = [[1,2,3], {a: 'b'}, 1,2,3];
+      expect(out).to.deep.equal(expected);
+    });
+
     it('should handle merge object and array', function() {
       var a = {
         a: 'b'
