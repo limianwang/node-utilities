@@ -152,7 +152,7 @@ describe('Test utilities', function() {
     });
   });
 
-  describe('memoize', function() {
+  describe('Memoize', function() {
     var memoize;
     before(function() {
       memoize = util.memoize;
@@ -565,6 +565,55 @@ describe('Test utilities', function() {
               done();
             });
         });
+    });
+  });
+
+  describe('Defer', function() {
+    var defer;
+
+    before(function() {
+      defer = util.defer;
+    });
+
+    it('should be able to defer to the next iteration', function(done) {
+      var func1 = sinon.stub();
+      var func2 = sinon.stub();
+
+      var deferred = sinon.stub();
+
+      func1();
+
+      defer().then(deferred);
+
+      func2();
+
+      assert.ok(func1.calledOnce);
+      assert.ok(func2.calledOnce);
+      assert.ok(deferred.notCalled);
+
+      setTimeout(function() {
+        assert.ok(deferred.calledOnce);
+        done();
+      }, 50);
+    });
+
+    it('should be able to support node callback style', function(done) {
+      var start = new Date().getTime();
+
+      defer(function() {
+        assert.closeTo(new Date().getTime(), start, 5);
+
+        done();
+      });
+    });
+
+    it('should be able to defer at a give time', function(done) {
+      var start = new Date().getTime();
+      defer(100, function() {
+        assert.closeTo(new Date().getTime(), start, 105);
+
+        done();
+      });
     });
   });
 });

@@ -158,6 +158,19 @@ function compareHash(raw, hash, done) {
   }).nodeify(done);
 }
 
+function defer(time, done) {
+  if(typeof time === 'function') {
+    done = time;
+    time = null;
+  }
+
+  time = time || 0;
+
+  return new Promise(function(resolve) {
+    return setTimeout(resolve, time);
+  }).nodeify(done);
+}
+
 module.exports = {
   clone: clone,
   merge: merge,
@@ -165,5 +178,6 @@ module.exports = {
   cluster: setupCluster,
   unique: unique,
   hash: hash,
-  compareHash: compareHash
+  compareHash: compareHash,
+  defer: defer
 };
