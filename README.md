@@ -3,6 +3,7 @@ node-utilities
 a generic utilities library for node.js
 
 [![Build Status](https://travis-ci.org/limianwang/node-utilities.svg?branch=master)](https://travis-ci.org/limianwang/node-utilities)
+[![Coverage Status](https://img.shields.io/coveralls/limianwang/node-utilities.svg)](https://coveralls.io/r/limianwang/node-utilities?branch=master)
 
 # Installation
 
@@ -12,7 +13,7 @@ Install and use it via npm + git.
 
 # Usage
 
-Clone: Clone an object
+### Clone: Clone an object
 
 ```javascript
 var util = require('./');
@@ -27,7 +28,7 @@ var obj = {
 var cloned = util.clone(obj);
 ```
 
-Merge: Merge two objects together
+### Merge: Merge two objects together
 
 ```javascript
 var util = require('./');
@@ -43,7 +44,7 @@ var b = {
 var out = util.merge(a, b);
 ```
 
-Memoize: memoize function responses
+### Memoize: memoize function responses
 
 ```javascript
 var util = require('./');
@@ -58,7 +59,7 @@ cache(1);
 cache(1); // returns from cache
 ```
 
-Cluster: Helper to start process in a cluster.
+### Cluster: Helper to start process in a cluster.
 
 Takes optional `config` as follow:
 
@@ -91,7 +92,7 @@ util.cluster(config, function() {
 });
 ```
 
-Token: Token creator
+### Token: Token creator
 
 ```javascript
 var util = require('./');
@@ -106,6 +107,30 @@ util.unique('someprefix', function(err, token) {
   console.log(token); // someprefix:<unique>
 });
 ```
+
+### Encrypt Sensitive Information (using `bcrypt`)
+
+Supports Promises and traditional node callback style.
+
+```javascript
+var util = require('./');
+
+util.hash('password')
+  .then(function(hashed) {
+    console.log(hashed);
+  })
+  .catch(function(err) {
+    console.log(err);
+  });
+  
+util.compare('password', hashed)
+  .then(function(result) {
+    console.log(result);
+  })
+  .catch(function(err) { 
+    console.log(err); 
+  });
+````
 
 # Tests
 
