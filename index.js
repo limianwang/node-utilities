@@ -1,6 +1,7 @@
 
 'use strict';
 
+var Promise = require('bluebird');
 var crypto = require('crypto');
 var os = require('os');
 var cluster = require('cluster');
@@ -113,10 +114,16 @@ function unique(prefix, done) {
     prefix = '';
   }
 
-  crypto.randomBytes(16, function(err, token) {
-    token = prefix ? prefix + ':' + token.toString('hex') : token.toString('hex');
-    done(err, token);
-  });
+  return new Promise(function(resolve, reject) {
+    return crypto.randomBytes(16, function(err, token) {
+      if(err) {
+        reject(err);
+      } else {
+        token = prefix ? prefix + ':' + token.toString('hex') : token.toString('hex');
+        resolve(token);
+      }
+    });
+  }).nodeify(done);
 }
 
 module.exports = {

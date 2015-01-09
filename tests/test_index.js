@@ -1,6 +1,7 @@
 
 'use strict';
 
+var crypto = require('crypto');
 var cluster = require('cluster');
 var os = require('os');
 
@@ -112,11 +113,19 @@ describe('Test utilities', function() {
 
     it('should merge object within array', function() {
       var a = [[1, 2, 3], { a: 'b' }];
-      var b = [1, 2, 3];
+      var b = [1, 2, {a : 'b'}];
 
       var out = merge(a, b);
 
-      var expected = [[1,2,3], {a: 'b'}, 1,2,3];
+      var expected = [[1,2,3], {a: 'b'}, 1,2,{a: 'b'}];
+      expect(out).to.deep.equal(expected);
+
+      var c = [1,2,3, [4, 5, 6]];
+      var d = [1,2,3, [2,2,2]];
+
+      out = merge(c, d);
+
+      expected = [1,2,3,[4,5,6], 1,2,3,[2,2,2]];
       expect(out).to.deep.equal(expected);
     });
 
@@ -411,20 +420,54 @@ describe('Test utilities', function() {
       unique = util.unique;
     });
 
-    it('should be able to get a token without prefix', function(done) {
-      var prefix = 'hello';
-      unique(prefix, function(err, token) {
-        expect(err).to.not.be.ok;
-        expect(token).to.be.a('string').to.match(/hello:/);
-
-        done();
-      });
+    it('should be able to get a token with a prefix', function(done) {
+      unique('user')
+        .then(function(token) {
+          expect(token).to.match(/^user:/);
+          done();
+        })
+        .catch(function(err) {
+          expect(err).to.not.exist;
+        });
     });
 
     it('should be able to ommit optional prefix', function(done) {
+      unique()
+        .then(function(token) {
+          expect(token).to.not.include(':');
+          expect(token).to.have.length(32);
+
+          done();
+        })
+        .catch(function(err) {
+          expect(err).to.not.exist;
+        });
+    });
+
+    it('should be able to catch error', function(done) {
+      sinon.stub(crypto, 'randomBytes').yields(new Error('fake'));
+
+      var stub = sinon.stub();
+
+      unique()
+        .then(stub)
+        .catch(function(err) {
+          expect(err).to.exist;
+          expect(err).to.have.property('constructor').to.have.property('name');
+
+          assert.ok(stub.notCalled);
+
+          crypto.randomBytes.restore();
+
+          done();
+        });
+    });
+
+    it('should support traditional callback', function(done) {
       unique(function(err, token) {
-        expect(err).to.not.be.ok;
-        expect(token).to.be.a('string');
+        expect(err).to.not.exist;
+        expect(token).to.have.length(32);
+
         done();
       });
     });

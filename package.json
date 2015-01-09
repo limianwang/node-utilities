@@ -25,5 +25,8 @@
     "istanbul": "^0.3.4",
     "mocha": "^2.0.1",
     "sinon": "^1.12.1"
+  },
+  "dependencies": {
+    "bluebird": "^2.6.2"
   }
 }
