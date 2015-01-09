@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha -R spec -u bdd $(find tests -name 'test_*.js')",
-    "coverage": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha $(find tests -name 'test_*.js') && open ./coverage/lcov-report/index.html"
+    "coverage": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha $(find tests -name 'test_*.js')"
   },
   "repository": {
     "type": "git",
