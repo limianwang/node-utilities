@@ -2,6 +2,7 @@
 'use strict';
 
 var Promise = require('bluebird');
+var bcrypt = require('bcrypt');
 var crypto = require('crypto');
 var os = require('os');
 var cluster = require('cluster');
@@ -126,10 +127,43 @@ function unique(prefix, done) {
   }).nodeify(done);
 }
 
+function hash(value, salt, done) {
+  if(typeof salt === 'function') {
+    done = salt;
+    salt = null;
+  }
+
+  salt = salt || 10;
+
+  return new Promise(function(resolve, reject) {
+    return bcrypt.hash(value, salt, function(err, hashed) {
+      if(err) {
+        reject(err);
+      } else {
+        resolve(hashed);
+      }
+    });
+  }).nodeify(done);
+}
+
+function compareHash(raw, hash, done) {
+  return new Promise(function(resolve, reject) {
+    return bcrypt.compare(raw, hash, function(err, result) {
+      if(err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  }).nodeify(done);
+}
+
 module.exports = {
   clone: clone,
   merge: merge,
   memoize: memoize,
   cluster: setupCluster,
-  unique: unique
+  unique: unique,
+  hash: hash,
+  compareHash: compareHash
 };

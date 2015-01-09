@@ -1,6 +1,7 @@
 
 'use strict';
 
+var bcrypt = require('bcrypt');
 var crypto = require('crypto');
 var cluster = require('cluster');
 var os = require('os');
@@ -470,6 +471,100 @@ describe('Test utilities', function() {
 
         done();
       });
+    });
+  });
+
+  describe('bcrypt', function() {
+    var hash, compareHash;
+
+    before(function() {
+      hash = util.hash;
+      compareHash = util.compareHash;
+    });
+
+    it('should be able to hash a password and compare', function(done) {
+      var password = 'my_long_long_important_password';
+
+      hash(password)
+        .then(function(hashed) {
+          expect(hashed).to.exist;
+          expect(hashed).to.not.equal(password);
+
+          compareHash(password, hashed)
+            .then(function(result) {
+              assert.ok(result);
+
+              done();
+            });
+        })
+        .catch(function(err) {
+          expect(err).to.not.exist;
+        });;
+    });
+
+    it('should be able to provide a salt', function(done) {
+      hash('test', 11)
+        .then(function(hashed) {
+          expect(hashed).to.exist;
+
+          compareHash('test', hashed)
+            .then(function(result) {
+              assert.ok(result);
+
+              done();
+            });
+        })
+        .catch(function(err) {
+          expect(err).to.not.exist;
+        });
+    });
+
+    it('should support node callback style', function(done) {
+      hash('test', function(err, hashed) {
+        expect(err).to.not.exist;
+        expect(hashed).to.exist;
+
+        compareHash('test', hashed, function(err, result) {
+          expect(err).to.not.exist;
+          assert.ok(result);
+
+          done();
+        });
+      });
+    });
+
+    it('should be able to catch hash error', function(done) {
+      sinon.stub(bcrypt, 'hash').yields(new Error('fake'));
+
+      hash('test', function(err, hashed) {
+        expect(err).to.exist;
+        expect(hashed).to.not.exist;
+
+        bcrypt.hash.restore();
+
+        done();
+      });
+    });
+
+    it('should catch compareHash error', function(done) {
+      sinon.stub(bcrypt, 'compare').yields(new Error('fake'));
+
+      var stub = sinon.stub();
+
+      hash('test')
+        .then(function(hashed) {
+          expect(hashed).to.exist;
+
+          compareHash('test', hashed)
+            .then(stub)
+            .catch(function(err) {
+              expect(err).to.exist;
+
+              assert.ok(stub.notCalled);
+
+              done();
+            });
+        });
     });
   });
 });
