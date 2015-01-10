@@ -94,18 +94,29 @@ util.cluster(config, function() {
 
 ### Token: Token creator
 
+Create uniquely generated tokens.
+
 ```javascript
 var util = require('./');
 
-util.unique(function(err, token) {
-  console.log(token); // use unique token.
-});
+util.unique()
+  .then(function(token) {
+    console.log(token);
+  })
+  .catch(function(err) {
+    // some error happened;
+    console.log(err);
+  });
 
 // or allow prefix.
 
-util.unique('someprefix', function(err, token) {
-  console.log(token); // someprefix:<unique>
-});
+util.unique('someprefix')
+  .then(function(token) {
+    console.log(token); // someprefix:<unique>
+  })
+  .catch(function(err) {
+    assert(err);
+  });
 ```
 
 ### Encrypt Sensitive Information (using `bcrypt`)
@@ -131,6 +142,21 @@ util.compare('password', hashed)
     console.log(err); 
   });
 ````
+
+### Defer
+
+Defer a function to a later time (default: 0 ms, ie. _next_ iteration)
+
+```js
+var util = require('./');
+
+util.defer(100)
+  .then(function() {
+    console.log('this happened 100 ms later!');
+  });
+
+console.log('this happens immediately!');
+```
 
 # Tests
 
