@@ -160,4 +160,6 @@ console.log('this happens immediately!');
 
 # Tests
 
-All tests are within `tests`. Run using `npm test`, or use `npm run-script coverage` for test coverage.
+All tests are within `tests`. 
+
+Run tests using `make test` or `make test-cov` for test coverage.
