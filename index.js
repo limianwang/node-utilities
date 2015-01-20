@@ -109,12 +109,7 @@ function setupCluster(config, done) {
   }
 }
 
-function unique(prefix, done) {
-  if(typeof prefix === 'function') {
-    done = prefix;
-    prefix = '';
-  }
-
+function unique(prefix) {
   return new Promise(function(resolve, reject) {
     return crypto.randomBytes(16, function(err, token) {
       if(err) {
@@ -124,15 +119,10 @@ function unique(prefix, done) {
         resolve(token);
       }
     });
-  }).nodeify(done);
+  });
 }
 
-function hash(value, salt, done) {
-  if(typeof salt === 'function') {
-    done = salt;
-    salt = null;
-  }
-
+function hash(value, salt) {
   salt = salt || 10;
 
   return new Promise(function(resolve, reject) {
@@ -143,10 +133,10 @@ function hash(value, salt, done) {
         resolve(hashed);
       }
     });
-  }).nodeify(done);
+  });
 }
 
-function compareHash(raw, hash, done) {
+function compareHash(raw, hash) {
   return new Promise(function(resolve, reject) {
     return bcrypt.compare(raw, hash, function(err, result) {
       if(err) {
@@ -155,20 +145,15 @@ function compareHash(raw, hash, done) {
         resolve(result);
       }
     });
-  }).nodeify(done);
+  });
 }
 
-function defer(time, done) {
-  if(typeof time === 'function') {
-    done = time;
-    time = null;
-  }
-
+function defer(time) {
   time = time || 0;
 
   return new Promise(function(resolve) {
     return setTimeout(resolve, time);
-  }).nodeify(done);
+  });
 }
 
 module.exports = {
