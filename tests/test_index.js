@@ -463,15 +463,6 @@ describe('Test utilities', function() {
           done();
         });
     });
-
-    it('should support traditional callback', function(done) {
-      unique(function(err, token) {
-        expect(err).to.not.exist;
-        expect(token).to.have.length(32);
-
-        done();
-      });
-    });
   });
 
   describe('bcrypt', function() {
@@ -507,43 +498,34 @@ describe('Test utilities', function() {
         .then(function(hashed) {
           expect(hashed).to.exist;
 
-          compareHash('test', hashed)
-            .then(function(result) {
-              assert.ok(result);
+          return compareHash('test', hashed);
 
-              done();
-            });
+        })
+        .then(function(result) {
+          assert.ok(result);
+
+          done();
         })
         .catch(function(err) {
           expect(err).to.not.exist;
         });
     });
 
-    it('should support node callback style', function(done) {
-      hash('test', function(err, hashed) {
-        expect(err).to.not.exist;
-        expect(hashed).to.exist;
-
-        compareHash('test', hashed, function(err, result) {
-          expect(err).to.not.exist;
-          assert.ok(result);
-
-          done();
-        });
-      });
-    });
-
     it('should be able to catch hash error', function(done) {
       sinon.stub(bcrypt, 'hash').yields(new Error('fake'));
 
-      hash('test', function(err, hashed) {
-        expect(err).to.exist;
-        expect(hashed).to.not.exist;
+      var stub = sinon.stub();
 
-        bcrypt.hash.restore();
+      hash('test')
+        .then(stub)
+        .catch(function(err) {
+          expect(err).to.exist;
+          assert.ok(stub.notCalled);
 
-        done();
-      });
+          bcrypt.hash.restore();
+
+          done();
+        });
     });
 
     it('should catch compareHash error', function(done) {
@@ -598,19 +580,22 @@ describe('Test utilities', function() {
     });
 
     it('should be able to support node callback style', function(done) {
-      var start = new Date().getTime();
+      var start = new Date;
 
-      defer(function() {
-        assert.closeTo(new Date().getTime(), start, 5);
+      defer().then(function() {
+        var diff = new Date - start;
+        expect(diff).to.be.within(0, 10);
 
         done();
       });
     });
 
     it('should be able to defer at a give time', function(done) {
-      var start = new Date().getTime();
-      defer(100, function() {
-        assert.closeTo(new Date().getTime(), start, 105);
+      var start = new Date;
+
+      defer(100).then(function() {
+        var diff = new Date - start;
+        expect(diff).to.be.within(95, 110);
 
         done();
       });
