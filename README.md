@@ -7,9 +7,11 @@ a generic utilities library for node.js
 
 # Installation
 
-Install and use it via npm + git.
+Install and use it via npm.
 
-`npm install git+ssh://git@github.com:limianwang/node-utilities.git --save`
+`npm install limianwang/node-utilities#v1.5.0 --save`
+
+This will install the github repo @ tag `v1.5.0`.
 
 # Usage
 
