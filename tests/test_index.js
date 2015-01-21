@@ -481,12 +481,12 @@ describe('Test utilities', function() {
           expect(hashed).to.exist;
           expect(hashed).to.not.equal(password);
 
-          compareHash(password, hashed)
-            .then(function(result) {
-              assert.ok(result);
+          return compareHash(password, hashed);
+        })
+        .then(function(result) {
+          assert.ok(result);
 
-              done();
-            });
+          done();
         })
         .catch(function(err) {
           expect(err).to.not.exist;
@@ -537,15 +537,15 @@ describe('Test utilities', function() {
         .then(function(hashed) {
           expect(hashed).to.exist;
 
-          compareHash('test', hashed)
-            .then(stub)
-            .catch(function(err) {
-              expect(err).to.exist;
+          return compareHash('test', hashed)
+        })
+        .then(stub)
+        .catch(function(err) {
+          expect(err).to.exist;
 
-              assert.ok(stub.notCalled);
+          assert.ok(stub.notCalled);
 
-              done();
-            });
+          done();
         });
     });
   });
@@ -579,7 +579,7 @@ describe('Test utilities', function() {
       }, 50);
     });
 
-    it('should be able to support node callback style', function(done) {
+    it('should be able be called almost immediately', function(done) {
       var start = new Date;
 
       defer().then(function() {
