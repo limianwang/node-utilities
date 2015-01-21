@@ -121,8 +121,6 @@ util.unique('someprefix')
 
 ### Encrypt Sensitive Information (using `bcrypt`)
 
-Supports Promises and traditional node callback style.
-
 ```javascript
 var util = require('./');
 
