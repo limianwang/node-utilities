@@ -156,6 +156,19 @@ function defer(time) {
   });
 }
 
+function safeParse(json) {
+  return new Promise(function(resolve, reject) {
+    var p = null;
+    try {
+      p = JSON.parse(json);
+    } catch(e) {
+      return reject(e);
+    }
+
+    return resolve(p);
+  });
+}
+
 module.exports = {
   clone: clone,
   merge: merge,
@@ -164,5 +177,6 @@ module.exports = {
   unique: unique,
   hash: hash,
   compareHash: compareHash,
-  defer: defer
+  defer: defer,
+  parse: safeParse
 };

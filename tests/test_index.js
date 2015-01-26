@@ -601,4 +601,30 @@ describe('Test utilities', function() {
       });
     });
   });
+
+  describe('Safe Parse JSON', function() {
+    var parse;
+
+    before(function() {
+      parse = util.parse;
+    });
+
+    it('should be able to catch error', function(done) {
+      parse('some-non-json-string').catch(function(err) {
+        expect(err).to.exist;
+
+        done();
+      });
+    });
+
+    it('should be able to parse object', function(done) {
+      var json = JSON.stringify({ a: 'b'});
+
+      parse(json).then(function(p) {
+        expect(p).to.deep.equal({ a: 'b' });
+
+        done();
+      });
+    });
+  });
 });

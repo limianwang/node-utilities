@@ -158,6 +158,26 @@ util.defer(100)
 console.log('this happens immediately!');
 ```
 
+### Parse JSON
+
+Often when you deal with async processes and have to pass data as JSON around, there is always potential for errors. 
+This function is to parse json safely, and return a promise.
+
+```js
+var util = require('./');
+var couldBeJSONcouldBeString = ...;
+
+util.parse(couldBeJSONcouldBeString)
+    .then(function(parsed) {
+        // parsed version of `couldBeJSONcouldBeString`
+        console.log(parsed);
+    })
+    .catch(function(err) {
+        // handle error here
+        console.log(err);
+    });
+```
+
 # Tests
 
 All tests are within `tests`. 
