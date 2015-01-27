@@ -169,14 +169,14 @@ var util = require('./');
 var couldBeJSONcouldBeString = ...;
 
 util.parse(couldBeJSONcouldBeString)
-    .then(function(parsed) {
-        // parsed version of `couldBeJSONcouldBeString`
-        console.log(parsed);
-    })
-    .catch(function(err) {
-        // handle error here
-        console.log(err);
-    });
+  .then(function(parsed) {
+    // parsed version of `couldBeJSONcouldBeString`
+    console.log(parsed);
+  })
+  .catch(function(err) {
+    // handle error here
+    console.log(err);
+  });
 ```
 
 ### ReadFile
@@ -185,10 +185,12 @@ util.parse(couldBeJSONcouldBeString)
 var util = require('./');
 
 util.read('filepath')
-    .then(function(data) {
-    })
-    .catch(function(err) {
-    });
+  .then(function(data) {
+    // use data
+  })
+  .catch(function(err) {
+    // handle error
+  });
 ```
 
 # Tests
