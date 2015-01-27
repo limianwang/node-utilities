@@ -19,11 +19,12 @@
   "devDependencies": {
     "chai": "^1.10.0",
     "istanbul": "^0.3.4",
-    "mocha": "^2.0.1",
+    "mocha": "^2.1.0",
     "sinon": "^1.12.1"
   },
   "dependencies": {
-    "bcrypt": "^0.8.0",
-    "bluebird": "^2.6.2"
+    "bcrypt": "^0.8.1",
+    "bluebird": "^2.6.2",
+    "native-or-bluebird": "^1.1.2"
   }
 }
