@@ -3,7 +3,8 @@ node-utilities
 a generic utilities library for node.js
 
 [![Build Status](https://travis-ci.org/limianwang/node-utilities.svg?branch=master)](https://travis-ci.org/limianwang/node-utilities)
-[![Coverage Status](https://img.shields.io/coveralls/limianwang/node-utilities.svg)](https://coveralls.io/r/limianwang/node-utilities?branch=master)
+[![Coverage Status](https://img.shields.io/coveralls/limianwang/node-utilities.svg?style=flat-square)](https://coveralls.io/r/limianwang/node-utilities?branch=master)
+[![github-tag](http://img.shields.io/github/tag/limianwang/node-utilities.svg?style=flat-square)](https://github.com/limianwang/node-utilities/releases)
 
 # Installation
 
