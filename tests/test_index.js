@@ -627,4 +627,28 @@ describe('Test utilities', function() {
       });
     });
   });
+
+  describe('Read File', function() {
+    var read;
+
+    before(function() {
+      read = util.read;
+    });
+
+    it('should be able to catch error', function(done) {
+      read('./tests/test-not-exist.txt').catch(function(err) {
+        expect(err).to.exist;
+
+        done();
+      });
+    });
+
+    it('should be able to read file', function(done) {
+      read('./tests/test-exist.txt').then(function(data) {
+        expect(data).to.be.a('string');
+
+        done();
+      });
+    });
+  });
 });

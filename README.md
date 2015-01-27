@@ -179,6 +179,18 @@ util.parse(couldBeJSONcouldBeString)
     });
 ```
 
+### ReadFile
+
+```js
+var util = require('./');
+
+util.read('filepath')
+    .then(function(data) {
+    })
+    .catch(function(err) {
+    });
+```
+
 # Tests
 
 All tests are within `tests`. 

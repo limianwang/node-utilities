@@ -5,6 +5,7 @@ var Promise = require('native-or-bluebird');
 var bcrypt = require('bcrypt');
 var crypto = require('crypto');
 var os = require('os');
+var fs = require('fs');
 var cluster = require('cluster');
 var slice = Array.prototype.slice;
 
@@ -169,6 +170,18 @@ function safeParse(json) {
   });
 }
 
+function readFile(path) {
+  return new Promise(function(resolve, reject) {
+    return fs.readFile(path, 'utf8', function(err, data) {
+      if(err) {
+        reject(err);
+      } else {
+        resolve(data);
+      }
+    });
+  });
+}
+
 module.exports = {
   clone: clone,
   merge: merge,
@@ -178,5 +191,6 @@ module.exports = {
   hash: hash,
   compareHash: compareHash,
   defer: defer,
-  parse: safeParse
+  parse: safeParse,
+  read: readFile
 };
