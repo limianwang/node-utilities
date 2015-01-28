@@ -158,16 +158,14 @@ function defer(time) {
 }
 
 function safeParse(json) {
-  return new Promise(function(resolve, reject) {
-    var p = null;
-    try {
-      p = JSON.parse(json);
-    } catch(e) {
-      return reject(e);
-    }
+  var p = null;
+  try {
+    p = JSON.parse(json);
+  } catch(e) {
+    return Promise.reject(e);
+  }
 
-    return resolve(p);
-  });
+  return Promise.resolve(p);
 }
 
 function readFile(path) {
