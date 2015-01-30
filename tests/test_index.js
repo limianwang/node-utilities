@@ -643,7 +643,7 @@ describe('Test utilities', function() {
     });
 
     it('should be able to catch error', function(done) {
-      read(null).catch(function(err) {
+      read('path-not-exist').catch(function(err) {
         expect(err).to.exist;
 
         done();
