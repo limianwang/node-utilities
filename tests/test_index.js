@@ -630,14 +630,20 @@ describe('Test utilities', function() {
   });
 
   describe('Read File', function() {
-    var read;
+    var read, path;
 
     before(function() {
+      path = './tests/test-read.txt';
       read = util.read;
+      fs.writeFileSync(path, 'js is awesome', 'utf8');
+    });
+
+    after(function() {
+      fs.unlinkSync(path);
     });
 
     it('should be able to catch error', function(done) {
-      read('./tests/test-not-exist.txt').catch(function(err) {
+      read(null).catch(function(err) {
         expect(err).to.exist;
 
         done();
@@ -645,8 +651,8 @@ describe('Test utilities', function() {
     });
 
     it('should be able to read file', function(done) {
-      read('./tests/test-exist.txt').then(function(data) {
-        expect(data).to.be.a('string');
+      read(path).then(function(data) {
+        expect(data).to.be.a('string').to.be.equal('js is awesome');
 
         done();
       });
