@@ -5,6 +5,7 @@ var bcrypt = require('bcrypt');
 var crypto = require('crypto');
 var cluster = require('cluster');
 var os = require('os');
+var fs = require('fs');
 
 var chai = require('chai');
 var sinon = require('sinon');
@@ -649,6 +650,45 @@ describe('Test utilities', function() {
 
         done();
       });
+    });
+  });
+
+  describe('Write File', function() {
+    var write, path;
+
+    before(function() {
+      path = './tests/test-write.txt';
+      write = util.write;
+    });
+
+    after(function() {
+      fs.unlinkSync(path);
+    });
+
+    it('should be able to write some text', function(done) {
+      write(path, 'hello world')
+        .then(function() {
+          return util.read(path);
+        })
+        .then(function(data) {
+          expect(data).to.be.equal('hello world');
+          done();
+        })
+        .catch(function(err) {
+          expect(err).to.not.be.ok;
+        });
+    });
+
+    it('should be able to catch err', function(done) {
+      sinon.stub(fs, 'writeFile').yields(new Error('fake'));
+
+      write(path, 'shoot')
+        .catch(function(err) {
+          expect(err).to.exist;
+
+          fs.writeFile.restore();
+          done();
+        });
     });
   });
 });

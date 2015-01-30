@@ -180,6 +180,18 @@ function readFile(path) {
   });
 }
 
+function writeFile(path, data) {
+  return new Promise(function(resolve, reject) {
+    return fs.writeFile(path, data, function(err) {
+      if(err) {
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+}
+
 module.exports = {
   clone: clone,
   merge: merge,
@@ -190,5 +202,6 @@ module.exports = {
   compareHash: compareHash,
   defer: defer,
   parse: safeParse,
-  read: readFile
+  read: readFile,
+  write: writeFile
 };
