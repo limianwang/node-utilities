@@ -179,17 +179,22 @@ util.parse(couldBeJSONcouldBeString)
   });
 ```
 
-### ReadFile
+### Read and Write File
 
 ```js
 var util = require('./');
 
-util.read('filepath')
+var path = 'some_path';
+
+util.write(path, 'hello world!')
+  .then(function() {
+    return util.read(path);
+  })
   .then(function(data) {
-    // use data
+    console.log(data); // hello world!
   })
   .catch(function(err) {
-    // handle error
+    console.log(err.stack);
   });
 ```
 
