@@ -203,3 +203,5 @@ util.write(path, 'hello world!')
 All tests are within `tests`. 
 
 Run tests using `make test` or `make test-cov` for test coverage.
+
+TravisCI build is tested against `node 0.10`, `node 0.11` and `iojs`
