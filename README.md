@@ -204,4 +204,9 @@ All tests are within `tests`.
 
 Run tests using `make test` or `make test-cov` for test coverage.
 
-TravisCI build is tested against `node 0.10`, `node 0.11` and `iojs`
+TravisCI build is tested against:
+
+    * `0.10` 
+    * `0.11` 
+    * `0.12`
+    * `iojs` (latest)
