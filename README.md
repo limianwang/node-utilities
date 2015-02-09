@@ -206,7 +206,7 @@ Run tests using `make test` or `make test-cov` for test coverage.
 
 TravisCI build is tested against:
 
-    * `0.10` 
-    * `0.11` 
-    * `0.12`
-    * `iojs` (latest)
+  - `0.10` 
+  - `0.11` 
+  - `0.12`
+  - `iojs` (latest)
