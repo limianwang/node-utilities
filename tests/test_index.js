@@ -31,12 +31,14 @@ describe('Test utilities', function() {
           }
         },
         b: [1,2, { key: 'field2' } ],
-        c: 3
+        c: new Date()
       };
 
       var result = clone(obj);
       expect(result).to.deep.equal(obj);
       expect(result).to.not.equal(obj);
+
+      expect(obj.c).to.not.equal(result.c);
     });
 
     it('should be able to clone an array', function() {

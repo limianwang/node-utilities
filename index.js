@@ -12,26 +12,24 @@ var slice = Array.prototype.slice;
 function clone(obj) {
   var copy;
 
-  if('object' === typeof obj && !!obj) {
-    if(Array.isArray(obj)) {
-      copy = [];
-      obj.forEach(function(element, index) {
-        if(typeof element === 'object') {
-          copy[index] = clone(element);
-        } else {
-          copy[index] = element;
-        }
-      });
-    } else {
-      copy = {};
-      Object.keys(obj).forEach(function(key) {
-        copy[key] = typeof obj[key] === 'object' ? clone(obj[key]) : obj[key];
-      });
-    }
-    return copy;
+  if(obj === null || typeof obj !== 'object') {
+    copy = obj;
+  } else if(obj instanceof Array) {
+    copy = [];
+    obj.forEach(function(element, index) {
+      copy[index] = clone(element);
+    });
+  } else if(obj instanceof Date) {
+    copy = new Date();
+    copy.setTime(obj.getTime());
   } else {
-    return obj;
+    copy = {};
+    Object.keys(obj).forEach(function(key) {
+      copy[key] = clone(obj[key]);
+    });
   }
+
+  return copy;
 }
 
 function merge(a, b) {
