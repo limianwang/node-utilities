@@ -1,4 +1,15 @@
 
+1.7.2 / 2015-02-20
+==================
+
+  * code: refactor `clone` to support Date
+  * build: chai@2.0.0 && bluebird@2.9.9 && native-or-bluebird@1.2.0
+  * docs: formatting readme
+  * docs: update test versions
+  * build: test 0.12
+  * docs: added information regarding travis build
+  * build: add iojs
+
 1.7.1 / 2015-02-02
 ==================
 
