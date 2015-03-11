@@ -1,4 +1,3 @@
-
 'use strict';
 
 var Promise = require('native-or-bluebird');
