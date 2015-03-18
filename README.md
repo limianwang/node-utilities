@@ -1,10 +1,11 @@
-node-utilities
+node-helper-utilities
 =============
 a generic utilities library for node.js
 
 [![Build Status](https://travis-ci.org/limianwang/node-utilities.svg?branch=master)](https://travis-ci.org/limianwang/node-utilities)
 [![Coverage Status](https://img.shields.io/coveralls/limianwang/node-utilities.svg?style=flat-square)](https://coveralls.io/r/limianwang/node-utilities?branch=master)
 [![github-tag](http://img.shields.io/github/tag/limianwang/node-utilities.svg?style=flat-square)](https://github.com/limianwang/node-utilities/releases)
+[![npm](https://img.shields.io/npm/v/node-helper-utilities.svg?style=flat-square)](https://www.npmjs.com/package/node--helper-utilities)
 [![Dependency Status](https://david-dm.org/limianwang/node-utilities.svg?style=flat-square)](https://david-dm.org/limianwang/node-utilities)
 [![devDependency Status](https://david-dm.org/limianwang/node-utilities/dev-status.svg?style=flat-square)](https://david-dm.org/limianwang/node-utilities#info=devDependencies)
 
@@ -12,9 +13,7 @@ a generic utilities library for node.js
 
 Install and use it via npm.
 
-`npm install limianwang/node-utilities#v1.5.0 --save`
-
-This will install the github repo @ tag `v1.5.0`.
+`npm install node-helper-utilities --save`
 
 # Usage
 
