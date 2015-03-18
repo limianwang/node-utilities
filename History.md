@@ -1,4 +1,15 @@
 
+1.7.3 / 2015-03-18
+==================
+
+  * docs. update the url to correct npm
+  * added .npmignore
+  * docs: update name to node-helper-utilities
+  * docs: added deps badge
+  * build: update to the makefile
+  * deps: chai@2.1.1 istanbul@0.3.7 sinon@1.13.0 bluebird@2.9.13
+
+
 1.7.2 / 2015-02-20
 ==================
 
