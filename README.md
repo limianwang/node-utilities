@@ -103,7 +103,8 @@ Create uniquely generated tokens.
 ```javascript
 var util = require('./');
 
-util.unique()
+util
+  .unique()
   .then(function(token) {
     console.log(token);
   })
@@ -114,7 +115,8 @@ util.unique()
 
 // or allow prefix.
 
-util.unique('someprefix')
+util
+  .unique('someprefix')
   .then(function(token) {
     console.log(token); // someprefix:<unique>
   })
@@ -128,7 +130,8 @@ util.unique('someprefix')
 ```javascript
 var util = require('./');
 
-util.hash('password')
+util
+  .hash('password')
   .then(function(hashed) {
     console.log(hashed);
   })
@@ -136,7 +139,8 @@ util.hash('password')
     console.log(err);
   });
   
-util.compare('password', hashed)
+util
+  .compare('password', hashed)
   .then(function(result) {
     console.log(result);
   })
@@ -152,7 +156,8 @@ Defer a function to a later time (default: 0 ms, ie. _next_ iteration)
 ```js
 var util = require('./');
 
-util.defer(100)
+util
+  .defer(100)
   .then(function() {
     console.log('this happened 100 ms later!');
   });
@@ -169,7 +174,8 @@ This function is to parse json safely, and return a promise.
 var util = require('./');
 var couldBeJSONcouldBeString = ...;
 
-util.parse(couldBeJSONcouldBeString)
+util
+  .parse(couldBeJSONcouldBeString)
   .then(function(parsed) {
     // parsed version of `couldBeJSONcouldBeString`
     console.log(parsed);
@@ -187,7 +193,8 @@ var util = require('./');
 
 var path = 'some_path';
 
-util.write(path, 'hello world!')
+util
+  .write(path, 'hello world!')
   .then(function() {
     return util.read(path);
   })
