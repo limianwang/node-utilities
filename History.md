@@ -1,4 +1,11 @@
 
+1.7.4 / 2015-03-28
+==================
+
+  * deps: update deps to latest
+  * docs: clean up documentations
+  * docs: in year 2015
+
 1.7.3 / 2015-03-18
 ==================
 
