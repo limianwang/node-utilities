@@ -1,6 +1,6 @@
 {
   "name": "node-helper-utilities",
-  "version": "1.7.4",
+  "version": "1.7.5",
   "description": "Generic helper utilities",
   "main": "index.js",
   "directories": {
