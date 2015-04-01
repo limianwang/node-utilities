@@ -93,6 +93,29 @@ describe('Test utilities', function() {
 
     });
 
+    it('should be able to merge array with object', function() {
+      var obj = {
+        arr: [{
+          a: 'b'
+        },
+        {
+          b: 'c'
+        }]
+      }
+
+      var r = merge({ i: 1 }, obj);
+
+      expect(r)
+        .to.deep.equal({
+          i: 1,
+          arr: [{
+            a: 'b'
+          }, {
+            b: 'c'
+          }]
+        });
+    });
+
     it('should merge objects embedded with array', function() {
       var a = {
         a: [1, 2, 3]

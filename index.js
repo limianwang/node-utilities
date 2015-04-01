@@ -40,16 +40,12 @@ function merge(a, b) {
   if(isArray) {
     out = out.concat(a);
     b.forEach(function(value) {
-      if(typeof value === 'object') {
-        out.push(merge(Array.isArray(value) ? [] : {}, value));
-      } else {
-        out.push(value);
-      }
+      out.push(clone(value));
     });
   } else {
     out = a;
     Object.keys(b).forEach(function(key) {
-      out[key] = typeof b[key] === 'object' ? merge({}, b[key]) : b[key];
+      out[key] = clone(b[key]);
     });
   }
 
