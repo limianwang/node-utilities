@@ -17,15 +17,14 @@
   },
   "homepage": "https://github.com/limianwang/node-utilities",
   "devDependencies": {
-    "bluebird": "^2.9.16",
-    "chai": "^2.2.0",
-    "istanbul": "^0.3.11",
-    "mocha": "^2.2.1",
+    "chai": "^2.3.0",
+    "istanbul": "^0.3.14",
+    "mocha": "^2.2.5",
     "sinon": "^1.14.1"
   },
   "dependencies": {
-    "bcrypt": "^0.8.1",
-    "bluebird": "^2.9.16",
+    "bcrypt": "^0.8.3",
+    "bluebird": "^2.9.25",
     "native-or-bluebird": "^1.2.0"
   }
 }
