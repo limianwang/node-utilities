@@ -185,6 +185,21 @@ function writeFile(path, data) {
   });
 }
 
+function padder(value, opts) {
+  opts = opts || {};
+
+  var num = opts.length || 2;
+  var prefix = opts.prefix || '0';
+
+  value = String(value);
+
+  do {
+    value = prefix + value;
+  } while(value.length < num)
+
+  return value;
+}
+
 module.exports = {
   clone: clone,
   merge: merge,
@@ -196,5 +211,6 @@ module.exports = {
   defer: defer,
   parse: safeParse,
   read: readFile,
-  write: writeFile
+  write: writeFile,
+  padder: padder
 };

@@ -721,4 +721,33 @@ describe('Test utilities', function() {
         });
     });
   });
+
+  describe('Padder', function() {
+    var padder = util.padder;
+
+    it('should be able to pad a string by default', function() {
+      var t = padder('h');
+
+      assert.ok(t === '0h');
+    });
+
+    it('should be able to pad with a strict length', function() {
+      var opts = {
+        length: 3
+      };
+      var t = padder('x', opts);
+
+      assert.ok(t === '00x');
+    });
+
+    it('should be able to pad with strict length and a prefix', function() {
+      var opts = {
+        prefix: 'x',
+        length: 3
+      };
+      var t = padder('x', opts);
+
+      assert.ok(t === 'xxx');
+    });
+  });
 });
