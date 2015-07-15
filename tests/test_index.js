@@ -725,10 +725,12 @@ describe('Test utilities', function() {
   describe('Padder', function() {
     var padder = util.padder;
 
-    it('should be able to pad a string by default', function() {
-      var t = padder('h');
+    it('should be able to pad a randomized string by default', function() {
+      var o = 'hhhh';
+      var t = padder(o);
 
-      assert.ok(t === '0h');
+      assert.ok(t === '0hhhh');
+      assert.ok(t.length === 5);
     });
 
     it('should be able to pad with a strict length', function() {

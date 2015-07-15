@@ -188,7 +188,7 @@ function writeFile(path, data) {
 function padder(value, opts) {
   opts = opts || {};
 
-  var num = opts.length || 2;
+  var num = opts.length || value.length + 1;
   var prefix = opts.prefix || '0';
 
   value = String(value);
