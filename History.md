@@ -1,4 +1,16 @@
 
+2.0.0 / 2015-07-30
+==================
+
+  * deps: chai@3.2.0 bcrypt@0.8.4 bluebird@2.9.34
+  * code: deprecate unnecessary memoize func
+  * code: always pad string length + 1
+  * build: use new travis infrastructure
+  * code: added padder (for prefixing)
+  * deps: bump chai
+  * deps: update dependencies
+  * docs: added badge for downloads
+
 1.7.5 / 2015-04-01
 ==================
 
