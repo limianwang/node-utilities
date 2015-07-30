@@ -52,19 +52,6 @@ function merge(a, b) {
   return out;
 }
 
-function memoize(fn) {
-  var ctx = fn;
-  ctx._values = ctx.values || {};
-  return function() {
-    var args = slice.call(arguments);
-    if(!ctx._values[args]) {
-      ctx._values[args] = fn.apply(ctx, args);
-    }
-
-    return ctx._values[args];
-  };
-}
-
 function setupCluster(config, done) {
   var defaults = {
     enable: true,
@@ -203,7 +190,6 @@ function padder(value, opts) {
 module.exports = {
   clone: clone,
   merge: merge,
-  memoize: memoize,
   cluster: setupCluster,
   unique: unique,
   hash: hash,
