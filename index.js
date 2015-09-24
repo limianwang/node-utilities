@@ -94,11 +94,11 @@ function unique(prefix) {
   return new Promise(function(resolve, reject) {
     return crypto.randomBytes(16, function(err, token) {
       if(err) {
-        reject(err);
-      } else {
-        token = prefix ? prefix + ':' + token.toString('hex') : token.toString('hex');
-        resolve(token);
+        return reject(err);
       }
+
+      token = prefix ? prefix + ':' + token.toString('hex') : token.toString('hex');
+      return resolve(token);
     });
   });
 }
@@ -109,10 +109,10 @@ function hash(value, salt) {
   return new Promise(function(resolve, reject) {
     return bcrypt.hash(value, salt, function(err, hashed) {
       if(err) {
-        reject(err);
-      } else {
-        resolve(hashed);
+        return reject(err);
       }
+
+      return resolve(hashed);
     });
   });
 }
@@ -121,10 +121,10 @@ function compareHash(raw, hash) {
   return new Promise(function(resolve, reject) {
     return bcrypt.compare(raw, hash, function(err, result) {
       if(err) {
-        reject(err);
-      } else {
-        resolve(result);
+        return reject(err);
       }
+
+      return resolve(result);
     });
   });
 }
@@ -152,10 +152,10 @@ function readFile(path) {
   return new Promise(function(resolve, reject) {
     return fs.readFile(path, 'utf8', function(err, data) {
       if(err) {
-        reject(err);
-      } else {
-        resolve(data);
+        return reject(err);
       }
+
+      return resolve(data);
     });
   });
 }
@@ -164,10 +164,10 @@ function writeFile(path, data) {
   return new Promise(function(resolve, reject) {
     return fs.writeFile(path, data, function(err) {
       if(err) {
-        reject(err);
-      } else {
-        resolve();
+        return reject(err);
       }
+
+      return resolve();
     });
   });
 }
