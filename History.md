@@ -1,4 +1,15 @@
 
+2.0.1 / 2015-10-01
+==================
+
+  * code: use return to avoid else
+  * build: test against all node versions
+  * build: suppress output from makefile
+  * deps: update mocha
+  * addons for .travis
+  * setting the env for compiler
+  * test against node.js 4.x
+
 2.0.0 / 2015-07-30
 ==================
 
@@ -81,12 +92,12 @@
   * make: use Makefile for build process
   * Update README.md
   * defer functions to later time
-  
+
 1.4.0 / 2015-01-09
 ==================
 
   * Update README.md
-  * Use coveralls 
+  * Use coveralls
   * bcrypt hash and code coverage
   * Increase code coverage, and update to use Promises
   * added check to ensure merging objects to objects
@@ -113,8 +124,8 @@
 1.1.1 / 2014-12-16
 ==================
   * added cluster helper.
-  * remove unused code 
-  * Fix Repository name 
+  * remove unused code
+  * Fix Repository name
 
 1.0.0 / 2014-12-08
 ==================
