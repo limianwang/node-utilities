@@ -16,6 +16,45 @@ chai.config.includeStack = true;
 describe('Test utilities', function() {
   var util = require('../');
 
+  describe('clean', function() {
+    var clean;
+
+    before(function() {
+      clean = util.clean;
+    });
+
+    it('should return the existing value', function() {
+      var a = 5;
+
+      var b = clean(a);
+      expect(b).to.equal(a);
+    });
+
+    it('should be able to clean an object', function() {
+      var d = new Date();
+      var a = {
+        b: false,
+        c: true,
+        d: {
+          a: 'b'
+        },
+        e: [true, false],
+        f: d
+      };
+
+      var r = clean(a);
+
+      expect(r).to.deep.equal({
+        c: true,
+        d: {
+          a: 'b'
+        },
+        e: [true],
+        f: d
+      });
+    });
+  });
+
   describe('Clone', function() {
     var clone;
     before(function() {

@@ -8,6 +8,33 @@ var fs = require('fs');
 var cluster = require('cluster');
 var slice = Array.prototype.slice;
 
+function clean(obj) {
+  if(obj === null || typeof obj !== 'object') {
+    return obj;
+  }
+
+  if(obj instanceof Array) {
+    return obj.filter(function(item) {
+      return !!clean(item);
+    });
+  }
+
+  if(obj instanceof Date) {
+    return obj;
+  }
+
+  var r = {};
+
+  Object.keys(obj).forEach(function(key) {
+    var item = clean(obj[key]);
+    if(!!item) {
+      r[key] = item;
+    }
+  });
+
+  return r;
+}
+
 function clone(obj) {
   var copy;
 
@@ -189,6 +216,7 @@ function padder(value, opts) {
 
 module.exports = {
   clone: clone,
+  clean: clean,
   merge: merge,
   cluster: setupCluster,
   unique: unique,
