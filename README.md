@@ -18,6 +18,23 @@ Install and use it via npm.
 
 # Usage
 
+### Clean: Filter out all non-true values
+
+```js
+var util = require('./');
+
+var obj = {
+  a: false,
+  b: true
+};
+
+var b = util.clean(obj);
+console.log(b);
+//  {
+//    b: true
+//  }
+```
+
 ### Clone: Clone an object
 
 ```javascript
@@ -124,14 +141,14 @@ util
   .catch(function(err) {
     console.log(err);
   });
-  
+
 util
   .compare('password', hashed)
   .then(function(result) {
     console.log(result);
   })
-  .catch(function(err) { 
-    console.log(err); 
+  .catch(function(err) {
+    console.log(err);
   });
 ````
 
@@ -153,7 +170,7 @@ console.log('this happens immediately!');
 
 ### Parse JSON
 
-Often when you deal with async processes and have to pass data as JSON around, there is always potential for errors. 
+Often when you deal with async processes and have to pass data as JSON around, there is always potential for errors.
 This function is to parse json safely, and return a promise.
 
 ```js
@@ -206,13 +223,16 @@ console.log(padded); // 'xxxxh'
 
 # Tests
 
-All tests are within `tests`. 
+All tests are within `tests`.
 
 Run tests using `make test` or `make test-cov` for test coverage.
 
 TravisCI build is tested against:
 
-  - `0.10` 
-  - `0.11` 
+  - `0.10`
+  - `0.11`
   - `0.12`
-  - `iojs` (latest)
+  - `1.x`
+  - `2.x`
+  - `3.x`
+  - `4.x`

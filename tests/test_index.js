@@ -23,13 +23,6 @@ describe('Test utilities', function() {
       clean = util.clean;
     });
 
-    it('should return the existing value', function() {
-      var a = 5;
-
-      var b = clean(a);
-      expect(b).to.equal(a);
-    });
-
     it('should be able to clean an object', function() {
       var d = new Date();
       var a = {
