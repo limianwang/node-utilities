@@ -1,4 +1,10 @@
 
+2.1.0 / 2015-10-16
+==================
+
+  * docs: update documentation for clean method
+  * code: add support for clean method
+
 2.0.1 / 2015-10-01
 ==================
 
