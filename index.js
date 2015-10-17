@@ -6,7 +6,6 @@ var crypto = require('crypto');
 var os = require('os');
 var fs = require('fs');
 var cluster = require('cluster');
-var slice = Array.prototype.slice;
 
 function clean(obj) {
   if(obj === null || typeof obj !== 'object') {
