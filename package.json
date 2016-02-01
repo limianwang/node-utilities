@@ -25,7 +25,6 @@
   "dependencies": {
     "any-promise": "^1.0.0",
     "bcrypt": "^0.8.4",
-    "bluebird": "^3.0.5",
-    "native-or-bluebird": "^1.2.0"
+    "bluebird": "^3.0.5"
   }
 }
