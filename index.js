@@ -1,6 +1,6 @@
 'use strict';
 
-var Promise = require('native-or-bluebird');
+var Promise = require('any-promise');
 var bcrypt = require('bcrypt');
 var crypto = require('crypto');
 var os = require('os');
