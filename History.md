@@ -1,4 +1,15 @@
 
+2.1.1 / 2016-02-01
+==================
+
+  * remove unused package from deps
+  * swap native-or-bluebird to use any-promise. closes #1
+  * license: bump year
+  * deps: bump to latest
+  * build: bump dependencies version
+  * deps: bump version
+  * code: remove slice
+
 2.1.0 / 2015-10-16
 ==================
 
