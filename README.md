@@ -227,12 +227,4 @@ All tests are within `tests`.
 
 Run tests using `make test` or `make test-cov` for test coverage.
 
-TravisCI build is tested against:
-
-  - `0.10`
-  - `0.11`
-  - `0.12`
-  - `1.x`
-  - `2.x`
-  - `3.x`
-  - `4.x`
+TravisCI build is tested against all versions `<= 6.x`
