@@ -1,6 +1,0 @@
-version: 2
-jobs:
-    build:
-        - add_ssh_keys:
-            fingerprints:
-                - "97:3c:3d:6b:75:e6:b2:86:c6:02:b1:eb:db:03:29:b9"
